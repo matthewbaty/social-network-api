@@ -28,28 +28,30 @@ const getUserById = async (req, res) => {
 // post new user
 const createUser = async (req, res) => {
     try {
-        const user = await User.create(req.body);
-        res.status(201).json(newUser);
+        const newUser = await User.create(req.body);
+        res.status(200).json(newUser);
     } catch (error) {
         res.status(500).json(error);
     }
 };
 
 // put update user
-const updateUser = async (req, res) => {
-    const userId = req.params.userId;
-    const updates = req.body;
+// const updateUser = async (req, res) => {
+//     const userId = req.params.id;
+//     const updates = req.body;
 
-    try {
-        const user = await User.findOneAndUpdate(userId, updates, { new: true });
-        if (!user) {
-            return res.status(404).json({ message: 'No user found with this id!' });
-        }
-        res.json(user);
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
+//     try {
+//         const user = await User.findOneAndUpdate(userId, updates, { new: true });
+//         if (!user) {
+//             return res.status(404).json({ message: 'No user found with this id!' });
+//         }
+//         res.json(user);
+//     } catch (error) {
+//         res.status(500).json(error);
+//     }
+// };
+
+const updateUser = async (req, res) => {
 
 // delete user
 const deleteUser = async (req, res) => {
