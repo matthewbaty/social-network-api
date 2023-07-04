@@ -24,17 +24,6 @@ const getThoughtById = async (req, res) => {
 };
 
 // post new thought
-// const createThought = async (req, res) => {
-//     const { thoughtText, username, userId } = req.body;
-
-//     try {
-//         const newThought = new Thought({ thoughtText, username, userId });
-//         const createdThought = await newThought.save();
-//         res.status(201).json(createdThought);
-//     } catch (error) {
-//         res.status(500).json(error);
-//     }
-// };
 
 const createThought = async (req, res) => {
     try {
@@ -47,6 +36,7 @@ const createThought = async (req, res) => {
         );
         res.status(200).json(newThought);
     } catch (error) {
+        // adding to log error when creating new thought
         console.log(error)
         res.status(500).json(error);
     }

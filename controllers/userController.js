@@ -82,25 +82,19 @@ const addFriend = async (req, res) => {
 };
 
 // delete friend
-const removeFriend = async ({ params }, res) => {
+const removeFriend = async (req, res) => {
     try {
-        const user = await User.findOneAndUpdate(
-            { _id: params.userId },
-            { $pull: { friends: params.friendId } },
-            { new: true }
+        const result = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
         );
-        if (!user) {
-            return res.status(404).json({ message: 'No user found with this id!' });
-        }
-        const friendIndex = !user.friends.includes(params.friendId);
-
-        if (friendIndex) {
-            res.json
-        } else {
-            res.json(user);
-        }
+        res.status(200).json(result);
+        // if (!user) {
+        //     return res.status(404).json({ message: 'No user found with this id!' });
+        // }
     } catch (error) {
-        res.status(400).json(error);
+        res.status(500).json(error);
     }
 };
 
